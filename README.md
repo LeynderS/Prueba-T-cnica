@@ -108,8 +108,7 @@ docker-compose up
 
 ## 🗂️ Dataset de Prueba
 
-En la carpeta `sample_docs/` encontrarás archivos de texto con los que puedes probar la aplicación.  
-Tu solución debe funcionar tanto con esos como con cualquier `.txt` o `.md`.
+Usar cualquier archivo `.txt`, PDF o `.md`.
 
 ---
 
