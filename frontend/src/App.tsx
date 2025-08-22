@@ -17,6 +17,7 @@ function App() {
           <Navbar />
           <main className="flex-1 p-4">
             <Routes>
+              <Route path="/" element={<UploadPage />} />
               <Route path="/upload" element={<UploadPage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/qa" element={<AskPage />} />
