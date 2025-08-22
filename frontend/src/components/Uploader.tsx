@@ -1,14 +1,20 @@
 import React, { useRef } from "react";
 import { useUploadContext, type FileItem } from "../contexts/UploadContext";
 
+const MIN_FILES = 3;
 const MAX_FILES = 10;
 
 const Uploader = () => {
-  const { files, uploadFiles } = useUploadContext();
+  const { files, uploadFiles, deleteAllFiles } = useUploadContext();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFiles = (selectedFiles: File[]) => {
     if (selectedFiles.length === 0) return;
+
+    if (selectedFiles.length < MIN_FILES) {
+      alert(`Debes subir al menos ${MIN_FILES} archivos.`);
+      return;
+    }
 
     if (selectedFiles.length > MAX_FILES) {
       alert(`Máximo ${MAX_FILES} archivos a la vez.`);
@@ -40,6 +46,17 @@ const Uploader = () => {
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) =>
     e.preventDefault();
 
+  const handleDeleteAll = async () => {
+    if (!confirm("¿Deseas eliminar todos los documentos indexados?")) return;
+
+    try {
+      await deleteAllFiles();
+      alert("Documentos eliminados correctamente.");
+    } catch {
+      alert("No hay documentos indexados.");
+    }
+  };
+
   return (
     <div className="max-w-xl mx-auto mt-6">
       <div
@@ -60,6 +77,17 @@ const Uploader = () => {
           className="hidden"
         />
       </div>
+
+      {files.length > 0 && (
+        <div className="flex justify-end mt-2">
+          <button
+            onClick={handleDeleteAll}
+            className="bg-red-600 text-white px-2 py-1 text-sm rounded hover:bg-red-700 transition"
+          >
+            Eliminar documentos
+          </button>
+        </div>
+      )}
 
       <div className="mt-4">
         {files.length === 0 && (

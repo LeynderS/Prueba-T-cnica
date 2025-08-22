@@ -45,3 +45,7 @@ async def process_files(files: List[UploadFile]) -> List[Dict]:
             })
 
     return DOCUMENT_INDEX
+
+async def delete_all_documents():
+    global DOCUMENT_INDEX
+    DOCUMENT_INDEX.clear()

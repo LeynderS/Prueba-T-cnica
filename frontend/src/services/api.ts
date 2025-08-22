@@ -19,6 +19,16 @@ export const uploadFiles = async (files: File[]) => {
   }
 };
 
+export const deleteFiles = async () => {
+  try {
+    const response = await api.delete("/ingest");
+    return response.data;
+  } catch (error) {
+    console.error("Error eliminando archivos:", error);
+    throw error;
+  }
+};
+
 export const searchQuery = async (q: string) => {
   const response = await api.get(`/search?q=${encodeURIComponent(q)}`);
   return response.data;

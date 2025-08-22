@@ -8,3 +8,10 @@ async def ingest_files(files: List[UploadFile]):
         return {"message": "Files ingested successfully", "documents": indexed_docs}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+async def delete_all_files():
+    try:
+        await ingest_service.delete_all_documents()
+        return {"message": "All documents deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

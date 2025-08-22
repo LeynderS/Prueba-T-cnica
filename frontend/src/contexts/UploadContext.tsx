@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import { uploadFiles as apiUploadFiles } from "../services/api";
+import { uploadFiles as apiUploadFiles, deleteFiles } from "../services/api";
 
 export interface FileItem {
   name: string;
@@ -11,6 +11,7 @@ interface UploadContextType {
   files: FileItem[];
   setFiles: (files: FileItem[]) => void;
   uploadFiles: (newFiles: File[]) => Promise<void>;
+  deleteAllFiles: () => Promise<void>;
 }
 
 const UploadContext = createContext<UploadContextType | undefined>(undefined);
@@ -35,8 +36,20 @@ export const UploadProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const deleteAllFiles = async () => {
+    try {
+      await deleteFiles();
+      setFiles([]);
+    } catch (error) {
+      console.error("Error eliminando documentos:", error);
+      throw error;
+    }
+  };
+
   return (
-    <UploadContext.Provider value={{ files, setFiles, uploadFiles }}>
+    <UploadContext.Provider
+      value={{ files, setFiles, uploadFiles, deleteAllFiles }}
+    >
       {children}
     </UploadContext.Provider>
   );
