@@ -7,4 +7,4 @@ async def search_controller(q: str) -> Dict:
         raise HTTPException(status_code=400, detail="La consulta no puede estar vacía.")
 
     results = search_service.search_documents(q)
-    return {"query": q, "results": results}
+    return {"results": results}

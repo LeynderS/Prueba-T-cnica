@@ -19,4 +19,9 @@ export const uploadFiles = async (files: File[]) => {
   }
 };
 
+export const searchQuery = async (q: string) => {
+  const response = await api.get(`/search?q=${encodeURIComponent(q)}`);
+  return response.data;
+};
+
 export default api;

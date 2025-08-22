@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import UploadPage from "./pages/UploadPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <main className="flex-1 p-4">
             <Routes>
               <Route path="/upload" element={<UploadPage />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </main>
           <Footer />
