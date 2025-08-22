@@ -9,6 +9,8 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     env_file:
       - .env
+    networks:
+      - app-net
 
   frontend:
     build: ./frontend
@@ -17,3 +19,5 @@ services:
       - "${FRONTEND_PORT}:5173"
     env_file:
       - .env
+    networks:
+      - app-net
