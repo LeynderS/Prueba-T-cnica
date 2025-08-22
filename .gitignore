@@ -207,3 +207,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# Build / cache
+dist
+coverage
