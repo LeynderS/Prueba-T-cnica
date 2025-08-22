@@ -24,4 +24,14 @@ export const searchQuery = async (q: string) => {
   return response.data;
 };
 
+export const askQuestion = async (question: string) => {
+  try {
+    const response = await api.post("/ask", { question });
+    return response.data;
+  } catch (error) {
+    console.error("Error en Q&A:", error);
+    throw error;
+  }
+};
+
 export default api;

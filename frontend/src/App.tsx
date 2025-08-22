@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import UploadPage from "./pages/UploadPage";
 import SearchPage from "./pages/SearchPage";
+import AskPage from "./pages/AskPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/upload" element={<UploadPage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/qa" element={<AskPage />} />
             </Routes>
           </main>
           <Footer />
