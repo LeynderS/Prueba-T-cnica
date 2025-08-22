@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Dict
 from app.services.search_service import search_documents
 
 def answer_question(question: str) -> Dict:
@@ -8,15 +8,24 @@ def answer_question(question: str) -> Dict:
         return {"question": question, "answer": "No se encontró información relevante.", "citations": []}
 
     # Tomar los textos más relevantes
-    top_texts = [r["text"] for r in results]
-    top_sources = [{"document": r["document"], "score": r["score"]} for r in results]
+    top_texts = " ".join([r["text"] for r in results])
+    
+    # Tokenización simple por puntos
+    sentences = top_texts.split(". ")
+    answer_text = ". ".join(sentences[:4])  # tomar solo las primeras 3-4 oraciones
+    if not answer_text.endswith("."):
+        answer_text += "."
 
-    # Crear una respuesta resumida (3-4 líneas aprox.)
-    summary = " ".join(top_texts)  # aquí podrías usar alguna librería de resumen si quieres
-    summary = " ".join(summary.split()[:80]) + "..."  # ejemplo: limitar a ~80 palabras
-
+    # Preparar citas únicas por documento
+    citations = []
+    seen_docs = set()
+    for r in results:
+        if r["document"] not in seen_docs:
+            citations.append({"document": r["document"]})
+            seen_docs.add(r["document"])
+            
     return {
         "question": question,
-        "answer": summary,
-        "citations": top_sources
+        "answer": answer_text,
+        "citations": citations
     }
