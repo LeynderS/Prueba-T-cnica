@@ -1,5 +1,5 @@
 const Footer = () => (
-  <footer className="bg-gray-200 text-center p-4 mt-6">
+  <footer className="bg-gray-100 text-center p-3 shadow-inner">
     &copy; 2025 Mini Asistente Q&A
   </footer>
 );

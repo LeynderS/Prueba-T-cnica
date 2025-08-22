@@ -47,11 +47,11 @@ const SearchPage = () => {
           placeholder="Escribe tu consulta..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 border border-gray-300 rounded-lg p-2"
+          className="flex-1 border border-gray-200 rounded-lg p-2 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:from-indigo-600 hover:to-indigo-700 transition"
         >
           Buscar
         </button>
@@ -66,7 +66,7 @@ const SearchPage = () => {
           {results.map((result, index) => (
             <div
               key={index}
-              className="border border-gray-300 rounded-lg p-4 shadow-sm bg-white"
+              className="border border-gray-200 rounded-xl p-5 shadow-md bg-gray-50"
             >
               <p className="text-gray-700">{result.text}</p>
               <p className="text-sm text-gray-500 mt-2">

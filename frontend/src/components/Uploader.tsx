@@ -60,12 +60,12 @@ const Uploader = () => {
   return (
     <div className="max-w-xl mx-auto mt-6">
       <div
-        className="border-2 border-dashed border-gray-400 p-8 text-center cursor-pointer rounded hover:border-blue-500 transition-colors"
+        className="border-2 border-dashed border-gray-300 p-8 text-center cursor-pointer rounded-xl hover:border-indigo-500 transition-colors bg-gradient-to-br from-gray-50 to-gray-100 shadow-sm"
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        <p className="text-gray-600">
+        <p className="text-gray-600 font-medium">
           Arrastra tus archivos aquí o haz click (.txt, .pdf)
         </p>
         <input
@@ -82,7 +82,7 @@ const Uploader = () => {
         <div className="flex justify-end mt-2">
           <button
             onClick={handleDeleteAll}
-            className="bg-red-600 text-white px-2 py-1 text-sm rounded hover:bg-red-700 transition"
+            className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 text-xs rounded hover:from-red-600 hover:to-red-700 transition"
           >
             Eliminar documentos
           </button>
@@ -96,7 +96,7 @@ const Uploader = () => {
         {files.map((file: FileItem) => (
           <div
             key={file.name}
-            className="flex justify-between items-center mb-2 p-2 border rounded"
+            className="flex justify-between items-center mb-2 p-2 border rounded-lg bg-gray-100 shadow-inner"
           >
             <span>{file.name}</span>
             <span>

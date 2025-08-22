@@ -49,11 +49,11 @@ const AskPage = () => {
           placeholder="Escribe tu pregunta..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          className="flex-1 border border-gray-300 rounded-lg p-2"
+          className="flex-1 border border-gray-200 rounded-lg p-2 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
         <button
           onClick={handleAsk}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:from-indigo-600 hover:to-indigo-700 transition"
         >
           Preguntar
         </button>
@@ -64,7 +64,7 @@ const AskPage = () => {
       {error && <p className="text-red-500">{error}</p>}
 
       {answerResult && (
-        <div className="w-full max-w-6xl border border-gray-300 rounded-lg p-6 shadow-sm bg-white">
+        <div className="w-full max-w-6xl border border-gray-200 rounded-xl p-5 shadow-md bg-gray-50">
           <p className="text-gray-700 mb-2">
             <strong>Pregunta:</strong> {answerResult.question}
           </p>
