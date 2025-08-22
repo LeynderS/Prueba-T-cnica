@@ -2,8 +2,13 @@ from typing import List, Dict
 from fastapi import HTTPException
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from nltk.corpus import stopwords
+import nltk
 from app.services.ingest_service import DOCUMENT_INDEX
 from unidecode import unidecode
+
+nltk.download('stopwords')
+spanish_stopwords = stopwords.words('spanish')
 
 def search_documents(query: str, top_n: int = 3) -> List[Dict]:
     if not DOCUMENT_INDEX:
@@ -14,7 +19,7 @@ def search_documents(query: str, top_n: int = 3) -> List[Dict]:
     documents = [doc["document"] for doc in DOCUMENT_INDEX]
 
     # Vectorizar los fragmentos y la consulta
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(stop_words=spanish_stopwords)
     tfidf_matrix = vectorizer.fit_transform(texts)
     query_vec = vectorizer.transform([unidecode(query.lower())])
 
