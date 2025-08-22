@@ -1,14 +1,6 @@
 from fastapi import FastAPI
-from dotenv import load_dotenv
-import os
+from app.routes import ingest
 
-# Cargar variables del archivo .env
-load_dotenv()
+app = FastAPI(title="QA Assistant Backend")
 
-app = FastAPI()
-
-@app.get("/")
-def read_env():
-    backend_port = os.getenv("BACKEND_PORT", "8000")
-    env = os.getenv("ENV", "development")
-    return {"BACKEND_PORT": backend_port, "ENV": env}
+app.include_router(ingest.router)
