@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     networks:
-      - app-net
+      - app_net
 
   frontend:
     build: ./frontend
@@ -20,4 +20,8 @@ services:
     env_file:
       - .env
     networks:
-      - app-net
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge

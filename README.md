@@ -1,143 +1,140 @@
-# 🧠 Mini Asistente de Q&A – Prueba Técnica
+# 🧠 Mini Asistente Q&A – Prueba Técnica
 
-¡Hola! 👋  
-Gracias por tu interés en unirte a nuestro equipo. Esta prueba técnica tiene como objetivo evaluar tu capacidad para construir una aplicación funcional de principio a fin, enfocándonos en la calidad de tu código, tu enfoque a la resolución de problemas y la experiencia de usuario.
-
----
-
-## 🚀 El Reto
-
-Desarrolla una micro-aplicación web que permita a los usuarios:
-
-- Subir archivos `.txt` o `.pdf` (entre 3 y 10).
-- Buscar contenido relevante dentro de los documentos.
-- Hacer preguntas en lenguaje natural y recibir una respuesta breve con citas de los documentos.
+Este proyecto es una aplicación web de asistente Q&A full stack que permite a los usuarios subir documentos (.txt o .pdf), buscar contenido relevante y hacer preguntas en lenguaje natural, recibiendo respuestas breves con citas de los documentos. Está desarrollado con **React + TypeScript** en el frontend y **FastAPI** en el backend, desplegado completamente con **Docker Compose**.
 
 ---
 
-## ⏱️ Tiempo Estimado
+## 📁 Estructura del proyecto
 
-6 a 8 horas.  
-No buscamos perfección, sino una solución funcional, clara y con buenas prácticas. Sé honesto con el tiempo que invertiste (agradecemos la transparencia).
-
----
-
-## ✅ Alcances Mínimos
-
-### A. Backend (FastAPI o Node.js/Express)
-
-Debe exponer los siguientes endpoints:
-
-- **POST `/ingest`**:  
-  Recibe múltiples archivos, los procesa y los indexa (en memoria o disco).
-
-- **GET `/search?q=...`**:  
-  Devuelve los pasajes más relevantes con:
-  - Texto del fragmento
-  - Nombre del documento
-  - Puntaje de relevancia
-
-- **POST `/ask`**:  
-  Recibe `{ "question": "string" }` y responde en 3–4 líneas, con 1–3 citas de respaldo.
-
-#### Motor de búsqueda y respuesta (elige una opción)
-
-- **Opción 1 – Clásica (sin LLM):**
-  - Indexa documentos dividiéndolos en fragmentos.
-  - Usa TF-IDF o BM25 para búsqueda.
-  - Devuelve frases extraídas como respuesta con su cita.
-
-- **Opción 2 – Con LLM:**
-  - Recupera los pasajes más relevantes.
-  - Genera la respuesta con un LLM (OpenAI, Gemini, etc.) usando un prompt con contexto.
-  - La respuesta debe:
-    - Citar correctamente las fuentes.
-    - Decir "No encuentro esa información en los documentos cargados" si no tiene contexto suficiente.
-
----
-
-### B. Frontend (React + TypeScript)
-
-La interfaz debe ser simple, funcional y clara. No es necesario usar librerías de componentes.
-
-**Componentes esperados:**
-
-- **Uploader:**  
-  Zona de drag & drop para subir documentos. Muestra los archivos indexados.
-
-- **Buscador:**  
-  Campo para consultas simples. Muestra los pasajes encontrados y su fuente.
-
-- **Q&A:**  
-  Campo para preguntas en lenguaje natural. Muestra respuesta y citas asociadas.
-
-**Estados:**  
-La UI debe reflejar claramente estados de carga, errores y resultados vacíos.
-
----
-
-### C. Despliegue y Entrega
-
-Todo el sistema debe levantarse con:
-
-```bash
-docker-compose up
+```
+prueba-t-cnica/
+├── backend/          # FastAPI (API, ingestión y búsqueda)
+├── frontend/         # React + TypeScript (interfaz de usuario)
+├── .env             # Variables de entorno
+├── docker-compose.yml
+└── README.md
 ```
 
-**Entrega:**
+---
 
-- Repositorio público en GitHub/GitLab.
-- Archivo `README.md` con:
-  - Instrucciones de ejecución.
-  - Decisiones técnicas y supuestos.
-  - Tiempo real invertido.
-  - Capturas de pantalla o un GIF corto (máx. 30s) mostrando la app.
+## 🚀 Requisitos
+
+- **Docker** y **Docker Compose** (para despliegue)
+- **Node.js 20+** (para desarrollo local del frontend sin Docker)
+- **Python 3.12+** (para desarrollo local del backend sin Docker)
 
 ---
 
-## ⭐ Alcances Deseables (Bonus)
+## ⚙️ Configuración rápida
 
-¿Te sobra tiempo? Estos extras suman puntos:
+### 1. Clonar el repositorio
 
-- Citas clicables que resaltan el texto original.
-- Persistencia del índice en `.json`, `.pkl`, etc.
-- Rate limiting o validaciones más robustas de archivos.
-- Pruebas unitarias extra en backend y frontend.
+```bash
+git clone <repo-url> mini-qna
+cd mini-qna
+```
 
----
+### 2. Renombrar archivos `.env.example a .env`
 
-## 🗂️ Dataset de Prueba
+### 3. Levantar los contenedores
 
-Usar cualquier archivo `.txt`, PDF o `.md`.
+```bash
+docker-compose up --build -d
+```
 
----
+### 4. Acceder a la app
 
-## 💯 Criterios de Evaluación
+| Servicio    | URL                   |
+| ----------- | --------------------- |
+| Frontend    | http://localhost:5173 |
+| Backend API | http://localhost:8000 |
 
-| Categoría         | Puntos | Detalle                                        |
-|-------------------|--------|------------------------------------------------|
-| Funcionalidad     | 40 pts | `/ingest`, `/search`, `/ask`, manejo de errores|
-| Calidad Técnica   | 30 pts | Estructura, limpieza, lógica, pruebas mínimas  |
-| Frontend & UX     | 20 pts | Flujo claro, feedback visual, citas            |
-| DevOps & Entrega  | 10 pts | Docker, documentación, demo                    |
-| **TOTAL**         | 100 pts| Aprobado: ≥70, Prioridad: ≥85 + bonus          |
+**Nota**: Dentro del contenedor frontend, las llamadas al backend se hacen gracias a la red definida en Docker Compose.
 
----
+### 5. Detener y limpiar
 
-## 📬 Entrega
+Para detener los contenedores y limpiar volúmenes (resetear el entorno):
 
-- Sube tu código a un repo público (GitHub/GitLab).
-- Asegúrate de que `README.md` esté completo.
-- Comparte con nosotros el enlace al repo.
-
----
-
-## 🎯 Recomendaciones Finales
-
-- Mantén tu solución simple y funcional.
-- Prioriza la claridad sobre la complejidad innecesaria.
-- Si algo no funciona, explícalo en el README: ¡la comunicación importa!
+```bash
+docker-compose down -v
+```
 
 ---
 
-¡Mucha suerte! Estamos deseando ver lo que puedes construir
+## 🛠️ Funcionalidades
+
+### Uploader
+
+- Soporta la carga de **3 a 10 archivos** en formatos `.txt` y `.pdf`.
+- Interfaz con **drag & drop** y selección manual de archivos.
+- Muestra el estado de cada archivo: **subiendo**, **completado** o **error**.
+- Botón para eliminar todos los archivos indexados, visible solo cuando hay documentos cargados.
+
+### Buscador
+
+- Campo buscar simple para consultas en texto.
+- Devuelve fragmentos relevantes con:
+  - Texto del fragmento.
+  - Nombre del documento.
+  - Puntaje de relevancia (basado en TF-IDF).
+
+### Q&A
+
+- Permite preguntas en **lenguaje natural**.
+- Responde en **3–4 líneas** con hasta **3 citas** de los documentos.
+- Si no hay contexto suficiente, muestra: **“No se encontró información relevante”**.
+- Si no hay documentos, muestra: **“No hay archivos indexados. Por favor, suba documentos primero.”**.
+
+---
+
+## 🧩 Decisiones técnicas y supuestos
+
+### Backend
+
+- **Framework**: FastAPI, por su rapidez y soporte nativo para async.
+- **Procesamiento de archivos**:
+  - PDFs procesados con **PyMuPDF** para extraer texto.
+  - Archivos `.txt` leídos directamente como texto plano.
+- **Indexación**: Documentos divididos en fragmentos y almacenados en memoria usando un índice basado en **TF-IDF** (Opción 1 – Clásica).
+- **Persistencia**: Índice en memoria (sin almacenamiento en disco para simplicidad).
+- **Validaciones**: Límite de 3 a 10 archivos
+
+### Frontend
+
+- **Stack**: React + TypeScript para tipado seguro y escalabilidad.
+- **Estilos**: TailwindCSS para un diseño rápido, limpio y responsive.
+- **Componentes**:
+  - Uploader con drag & drop y feedback visual.
+  - Buscador con lista de resultados clara.
+  - Q&A con respuestas concisas y citas numeradas.
+- **Estados**: Feedback claro para carga, errores y resultados vacíos.
+
+### Despliegue
+
+- **Docker Compose**: Define una red `app-net` para comunicación entre frontend y backend.
+
+### Supuestos
+
+- No se requiere autenticación ni manejo de sesiones.
+- La solución prioriza funcionalidad y claridad sobre optimizaciones avanzadas.
+- No se implementó persistencia en disco para mantener la simplicidad.
+- Estilos minimalistas pero funcionales, enfocados en la usabilidad.
+
+---
+
+## ⏱️ Tiempo invertido
+
+- **Tiempo estimado**: 6–8 horas.
+- **Tiempo aproximado real invertido**: ~6/6.5 horas.
+
+  - Backend: 2.5-3 horas (configuración de FastAPI, indexación, endpoints).
+  - Frontend: 3.5 horas (interfaz, conexión con API, estados)
+
+## 📸 Capturas / GIF
+
+### GIF de demostración
+
+![Demo GIF](gif/mini-qa-app.gif)
+_Flujo completo: subir archivos, buscar contenido y hacer una pregunta (<30s)._
+
+¡Gracias por revisar mi solución! Espero que cumpla con las expectativas. 🚀
