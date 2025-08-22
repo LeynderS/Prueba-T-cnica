@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import { useUploadContext, type FileItem } from "../contexts/UploadContext";
+import { useUploadContext } from "../contexts/UploadContext";
+import { type FileItem } from "../interfaces/File";
 
 const MIN_FILES = 3;
 const MAX_FILES = 10;

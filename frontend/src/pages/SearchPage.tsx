@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { searchQuery } from "../services/api";
 import { AxiosError } from "axios";
-
-interface SearchResult {
-  text: string;
-  document: string;
-  score: number;
-}
+import { type SearchResult } from "../interfaces/Search";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");

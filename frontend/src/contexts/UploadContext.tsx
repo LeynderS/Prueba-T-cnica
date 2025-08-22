@@ -1,11 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { uploadFiles as apiUploadFiles, deleteFiles } from "../services/api";
-
-export interface FileItem {
-  name: string;
-  status: "pending" | "success" | "error";
-  message?: string;
-}
+import { type FileItem } from "../interfaces/File";
 
 interface UploadContextType {
   files: FileItem[];

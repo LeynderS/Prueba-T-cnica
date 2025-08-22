@@ -1,16 +1,7 @@
 import { useState } from "react";
 import { askQuestion } from "../services/api";
 import { AxiosError } from "axios";
-
-interface Citation {
-  document: string;
-}
-
-interface AnswerResult {
-  question: string;
-  answer: string;
-  citations: Citation[];
-}
+import { type AnswerResult } from "../interfaces/Answer";
 
 const AskPage = () => {
   const [question, setQuestion] = useState("");
